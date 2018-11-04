@@ -22,12 +22,11 @@ provider:
 
 package:
   individually: true
+  path: dist
 
 functions:
   create:
     handler: todos/create.create
-    package:
-      artifact: ./artifacts/create.zip
     events:
       - http:
           path: todos
@@ -40,8 +39,6 @@ functions:
 
   list:
     handler: todos/list.list
-    package:
-      artifact: ./artifacts/list.zip
     events:
       - http:
           path: todos
@@ -50,8 +47,6 @@ functions:
 
   get:
     handler: todos/get.get
-    package:
-      artifact: ./artifacts/get.zip
     events:
       - http:
           path: todos/{id}
@@ -60,8 +55,6 @@ functions:
 
   update:
     handler: todos/update.update
-    package:
-      artifact: ./artifacts/update.zip
     events:
       - http:
           path: todos/{id}
@@ -70,8 +63,6 @@ functions:
 
   delete:
     handler: todos/delete.delete
-    package:
-      artifact: ./artifacts/delete.zip
     events:
       - http:
           path: todos/{id}
