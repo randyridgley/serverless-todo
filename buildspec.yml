@@ -4,7 +4,6 @@ phases:
   install:
     commands:
       - npm install -g serverless
-      - npm install
   build:
     commands:
     - sls package -v -s dev
