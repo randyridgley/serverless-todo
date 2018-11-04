@@ -3,10 +3,11 @@ version: 0.2
 phases:
   install:
     commands:
-    - npm install
+      - npm install -g serverless
+      - npm install
   build:
     commands:
-    - npm run package
+    - sls package -v -s dev
   post_build:
     commands:
     - for file in ./.serverless/cloudformation*.json; do cp "$file" "./serverless-stack.json"; done
