@@ -7,6 +7,8 @@ provider:
   runtime: python2.7
   environment:
     DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+  deploymentBucket:
+    name: todos-artifacts-rr
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -18,9 +20,14 @@ provider:
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
+package:
+  individually: true
+
 functions:
   create:
     handler: todos/create.create
+    package:
+      artifact: ./artifacts/create.zip
     events:
       - http:
           path: todos
@@ -33,6 +40,8 @@ functions:
 
   list:
     handler: todos/list.list
+    package:
+      artifact: ./artifacts/list.zip
     events:
       - http:
           path: todos
@@ -41,6 +50,8 @@ functions:
 
   get:
     handler: todos/get.get
+    package:
+      artifact: ./artifacts/get.zip
     events:
       - http:
           path: todos/{id}
@@ -49,6 +60,8 @@ functions:
 
   update:
     handler: todos/update.update
+    package:
+      artifact: ./artifacts/update.zip
     events:
       - http:
           path: todos/{id}
@@ -57,6 +70,8 @@ functions:
 
   delete:
     handler: todos/delete.delete
+    package:
+      artifact: ./artifacts/delete.zip
     events:
       - http:
           path: todos/{id}
