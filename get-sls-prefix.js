@@ -1,6 +1,6 @@
 const { readFileSync } = require('fs');
 
-const json = readFileSync('./.serverless/serverless-state.json');
+const json = readFileSync('./dist/serverless-state.json');
 const state = JSON.parse(json);
 
 const prefix = state.package.artifactDirectoryName;
