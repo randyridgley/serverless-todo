@@ -1,28 +1,29 @@
 ### Creating the Serverless application
 
 ``` 
-mkdir hello-world 
-cd hello-world
-sls create --template aws-python3 --name hello-world
+mkdir {project-folder} 
+cd {project-folder}
+sls create --template aws-python3 --name {project-folder}
+pip install httpie
 code .
 sls deploy -v
-http https://3rz2wxy8te.execute-api.us-east-1.amazonaws.com/dev/hello
-echo '{ "text": "My First Todo" }' | http POST https://eumgrqs7ob.execute-api.us-east-1.amazonaws.com/dev/todos
+http https://{api-url}/dev/hello
+echo '{ "text": "My First Todo" }' | http POST https://{api-url}/dev/todos
 
-http https://eumgrqs7ob.execute-api.us-east-1.amazonaws.com/dev/todos
+http https://{api-url}/dev/todos
 
-aws cognito-idp sign-up --region us-east-1 --client-id quei59dcn7qpf9r42jeba89db --username admin@example.com --password Passw0rd!
+aws cognito-idp sign-up --region {your-aws-region} --client-id {cognito-client-id} --username admin@example.com --password {password}
 
-aws cognito-idp admin-confirm-sign-up --region us-east-1 --user-pool-id us-east-1_28fgD17Qk --username admin@example.com
+aws cognito-idp admin-confirm-sign-up --region {your-aws-region} --user-pool-id {cognito-user-pool} --username admin@example.com
 
- aws cognito-idp admin-initiate-auth --region us-east-1 --cli-input-json file://auth.json
+ aws cognito-idp admin-initiate-auth --region {your-aws-region} --cli-input-json file://auth.json
 
- echo '{ "text": "Learn Serverless" }' | http POST https://eumgrqs7ob.execute-api.us-east-1.amazonaws.com/dev/todos Authorization:"Bearer eyJraWQiOiJYXC9RbVNJV1U2NlJZVzZJTDdvZFFTVzZlelp6OU9TN3c3eTNuYUE1aVVXMD0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI0YzQxMmRmOS0zNTIyLTQ4NjAtYmVmOC05YzViNTkxY2EzZmIiLCJhdWQiOiJxdWVpNTlkY243cXBmOXI0MmplYmE4OWRiIiwiZXZlbnRfaWQiOiI4ZGMzZjI4ZS1kZmFmLTExZTgtYmUyOS05OTRmNGNhZGFiMjUiLCJ0b2tlbl91c2UiOiJpZCIsImF1dGhfdGltZSI6MTU0MTI4MDU3MiwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfMjhmZ0QxN1FrIiwiY29nbml0bzp1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIiwiZXhwIjoxNTQxMjg0MTcyLCJpYXQiOjE1NDEyODA1NzJ9.FY5eCb-MpV5ngFIKNPtpuEDBOeUV5DZd3roj6EiCfhWuKvN9DwwG4SqpLtUMbsBn_la2hHHDEx0SuVX9DRVtTHNNCViks7kr89r3wBqGrgIw9vlulddkgrSkylWUNcIvwPoEhLsaKhU8UlRGMk21SgHxt54J3NCS4GOMZBpBqQzzc1EJyVCcm41tRqnAu5nY8qXQSLvovI7-jT9wuttkkiWfWErmsz0AuXv_z9DWgCnCLvXTPMZ6gKhJ8guK_FjvwjjwOUsBrp791UA2HIM8ecYvJ60UOSCOG2SrX8uqM_LPE5GknjgjgFxZAbM267RHgRNv079h31Uzwthu_Gh79g"
+ echo '{ "text": "Learn Serverless" }' | http POST https://{api-url}/dev/todos Authorization:"Bearer {your-idtoken}"
 ``` 
 
 ### Register a user
 
-> aws cognito-idp sign-up --region {your-aws-region} --client-id {your-client-id} --username admin@example.com --password Passw0rd!
+> aws cognito-idp sign-up --region {your-aws-region} --client-id {your-client-id} --username admin@example.com --password {password}
 
 ### Confirm user registration
 
@@ -40,7 +41,7 @@ aws cognito-idp admin-confirm-sign-up --region us-east-1 --user-pool-id us-east-
     "AuthFlow": "ADMIN_NO_SRP_AUTH",
     "AuthParameters": {
         "USERNAME": "admin@example.com",
-        "PASSWORD": "Passw0rd!"
+        "PASSWORD": "{password}"
     }
 }
 
