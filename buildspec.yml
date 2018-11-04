@@ -12,7 +12,7 @@ phases:
     - for file in ./.serverless/cloudformation*.json; do cp "$file" "./serverless-stack.json"; done
     - prefix=$(node ./get-sls-prefix.js)
     - echo "$prefix"
-    - aws s3 sync ./artifacts "$prefix"
+    - aws s3 sync ./.serverless/*.zip "$prefix"
 
 artifacts:
   files:
