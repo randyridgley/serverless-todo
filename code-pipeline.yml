@@ -80,9 +80,7 @@ Resources:
             ActionMode: REPLACE_ON_FAILURE
             RoleArn: !GetAtt CFNServiceRole.Arn
             StackName: !Sub ${ApplicationName}-test
-            Capabilities: 
-              - CAPABILITY_IAM
-              - CAPABILITY_NAMED_IAM
+            Capabilities: CAPABILITY_NAMED_IAM
             TemplatePath: !Sub 'Build::serverless-stack.json'
         - Name: ApproveTestStack
           RunOrder: 2
